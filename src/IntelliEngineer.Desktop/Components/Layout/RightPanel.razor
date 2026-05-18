@@ -1,0 +1,22 @@
+@inject StateContainer StateContainer
+
+<div class="right-panel">
+    <div class="panel-section">
+        <div class="panel-title">会话记忆</div>
+        @if (StateContainer.ActiveMemories.Any())
+        {
+            @foreach (var mem in StateContainer.ActiveMemories.Take(5))
+            {
+                <div class="memory-item">@mem.Key</div>
+            }
+        }
+        else
+        {
+            <div class="empty-hint">暂无相关记忆</div>
+        }
+    </div>
+    <div class="panel-section">
+        <div class="panel-title">快速操作</div>
+        <div class="panel-hint">开发中...</div>
+    </div>
+</div>

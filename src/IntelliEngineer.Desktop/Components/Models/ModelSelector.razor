@@ -1,0 +1,9 @@
+<div class="model-selector" @onclick="ToggleDropdown">
+    <span>@currentModel</span>
+    <span style="margin-left: 4px;">▼</span>
+</div>
+
+@code {
+    private string currentModel = "Ollama 14B";
+    private void ToggleDropdown() { }
+}

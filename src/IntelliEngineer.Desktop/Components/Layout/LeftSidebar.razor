@@ -1,0 +1,61 @@
+@inject StateContainer StateContainer
+
+<div class="left-sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-title">智工助手</div>
+        <div class="sidebar-subtitle">v0.1</div>
+    </div>
+
+    <div class="role-switcher">
+        <div class="role-seal @(StateContainer.CurrentRole == UserRole.Engineer ? "active" : "")"
+             @onclick="SwitchToEngineer" title="工程师">
+            工<span class="role-label">工程师</span>
+        </div>
+        <div class="role-seal @(StateContainer.CurrentRole == UserRole.Clerk ? "active" : "")"
+             @onclick="SwitchToClerk" title="文员">
+            文<span class="role-label">文员</span>
+        </div>
+        <div class="role-seal @(StateContainer.CurrentRole == UserRole.Accountant ? "active" : "")"
+             @onclick="SwitchToAccountant" title="会计">
+            会<span class="role-label">会计</span>
+        </div>
+        <div class="role-seal @(StateContainer.CurrentRole == UserRole.ProjectManager ? "active" : "")"
+             @onclick="SwitchToPM" title="项目经理">
+            项<span class="role-label">项目经理</span>
+        </div>
+    </div>
+
+    <nav class="nav-section">
+        <div class="nav-item @(StateContainer.CurrentPage == "chat" ? "active" : "")" @onclick="GoChat">
+            <span class="nav-icon">💬</span> 对话
+        </div>
+        <div class="nav-item @(StateContainer.CurrentPage == "study" ? "active" : "")" @onclick="GoStudy">
+            <span class="nav-icon">📜</span> 文房
+        </div>
+        <div class="nav-item @(StateContainer.CurrentPage == "skills" ? "active" : "")" @onclick="GoSkills">
+            <span class="nav-icon">🏷️</span> 技能
+        </div>
+    </nav>
+
+    <nav class="nav-section">
+        <div class="nav-item @(StateContainer.CurrentPage == "settings" ? "active" : "")" @onclick="GoSettings">
+            <span class="nav-icon">⚙️</span> 设置
+        </div>
+    </nav>
+
+    <div class="session-list">
+        <SessionList />
+    </div>
+</div>
+
+@code {
+    private void SwitchToEngineer() => StateContainer.CurrentRole = UserRole.Engineer;
+    private void SwitchToClerk() => StateContainer.CurrentRole = UserRole.Clerk;
+    private void SwitchToAccountant() => StateContainer.CurrentRole = UserRole.Accountant;
+    private void SwitchToPM() => StateContainer.CurrentRole = UserRole.ProjectManager;
+
+    private void GoChat() => StateContainer.CurrentPage = "chat";
+    private void GoStudy() => StateContainer.CurrentPage = "study";
+    private void GoSkills() => StateContainer.CurrentPage = "skills";
+    private void GoSettings() => StateContainer.CurrentPage = "settings";
+}

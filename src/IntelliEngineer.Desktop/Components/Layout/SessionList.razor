@@ -1,0 +1,16 @@
+@inject StateContainer StateContainer
+
+<div class="session-group">
+    <div class="group-title">会话列表</div>
+    @foreach (var s in StateContainer.Sessions)
+    {
+        <div class="session-item @(StateContainer.ActiveSession?.Id == s.Id ? "active" : "")"
+             @onclick="() => SelectSession(s)">
+            <span>@s.Title</span>
+        </div>
+    }
+</div>
+
+@code {
+    private void SelectSession(ChatSession s) => StateContainer.ActiveSession = s;
+}

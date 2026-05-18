@@ -1,0 +1,19 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+__pycache__/
+*.pyc
+Data/*.db
+Data/*.db-shm
+Data/*.db-wal
+*.log
+secrets.json
+appsettings.Development.json
+
+# 排除的目录
+DeepSeek-Reasonix-main/
+hermes-agent-main/
+openhanako-main/
+docs/

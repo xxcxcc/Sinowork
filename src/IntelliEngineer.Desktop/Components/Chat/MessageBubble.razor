@@ -1,0 +1,25 @@
+<div class="message-bubble @(Message.Sender == MessageSender.User ? "user" : "assistant")">
+    @RenderContent()
+    <div class="message-time">@Message.CreatedAt.ToString("HH:mm")</div>
+</div>
+
+@code {
+    [Parameter] public ChatMessage Message { get; set; } = new();
+
+    private RenderFragment RenderContent() => builder =>
+    {
+        if (Message.Type == MessageType.Code)
+        {
+            builder.OpenElement(0, "pre");
+            builder.AddContent(1, Message.Content);
+            builder.CloseElement();
+        }
+        else
+        {
+            builder.AddMarkupContent(0, FormatText(Message.Content));
+        }
+    };
+
+    private static string FormatText(string text)
+        => System.Net.WebUtility.HtmlEncode(text).Replace("\n", "<br/>");
+}

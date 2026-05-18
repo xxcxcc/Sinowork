@@ -1,0 +1,13 @@
+@inject StateContainer StateContainer
+
+<div class="top-bar">
+    <div class="top-bar-left">
+        @if (StateContainer.ActiveSession is not null)
+        {
+            <span class="session-title">@StateContainer.ActiveSession.Title</span>
+        }
+    </div>
+    <div class="top-bar-right">
+        <ModelSelector />
+    </div>
+</div>

@@ -1,0 +1,30 @@
+@inject StateContainer StateContainer
+@inject ChatService ChatService
+
+<div class="chat-input-area">
+    <div class="input-scroll">
+        <input type="text" @bind="inputText" @bind:event="oninput"
+               placeholder="请输入您的问题或指令..."
+               @onkeydown="OnKeyDown" />
+        <button class="btn-seal" @onclick="SendMessage"
+                disabled="@string.IsNullOrWhiteSpace(inputText)">发</button>
+    </div>
+</div>
+
+@code {
+    private string inputText = "";
+
+    private async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(inputText))
+            await SendMessage();
+    }
+
+    private async Task SendMessage()
+    {
+        if (string.IsNullOrWhiteSpace(inputText)) return;
+        var text = inputText;
+        inputText = "";
+        await ChatService.SendMessageAsync(text);
+    }
+}

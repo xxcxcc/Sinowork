@@ -1,0 +1,31 @@
+<div class="settings-layout">
+    <nav class="settings-nav">
+        <div class="settings-nav-item @(activeTab == "general" ? "active" : "")" @onclick="ShowGeneral">
+            通用设置
+        </div>
+        <div class="settings-nav-item @(activeTab == "security" ? "active" : "")" @onclick="ShowSecurity">
+            安全设置
+        </div>
+        <div class="settings-nav-item @(activeTab == "about" ? "active" : "")" @onclick="ShowAbout">
+            关于
+        </div>
+    </nav>
+    <div class="settings-content">
+        @switch (activeTab)
+        {
+            case "general":
+                <GeneralSettings /> break;
+            case "security":
+                <SecuritySettings /> break;
+            case "about":
+                <AboutPage /> break;
+        }
+    </div>
+</div>
+
+@code {
+    private string activeTab = "general";
+    private void ShowGeneral() => activeTab = "general";
+    private void ShowSecurity() => activeTab = "security";
+    private void ShowAbout() => activeTab = "about";
+}

@@ -1,0 +1,34 @@
+@inject StateContainer StateContainer
+
+<div class="chat-window">
+    <div class="message-list">
+        @if (StateContainer.ActiveSession?.Messages?.Any() == true)
+        {
+            @foreach (var msg in StateContainer.ActiveSession.Messages)
+            {
+                <div class="message-row @(msg.Sender == MessageSender.User ? "user" : "assistant")">
+                    <div class="message-avatar @(msg.Sender == MessageSender.User ? "user" : "assistant")">
+                        @(msg.Sender == MessageSender.User ? "我" : "智")
+                    </div>
+                    <MessageBubble Message="msg" />
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-state">
+                <div class="empty-state-icon">💬</div>
+                <div class="empty-state-text">开始新对话，输入您的问题</div>
+            </div>
+        }
+
+        @if (StateContainer.IsStreaming)
+        {
+            <div class="message-row assistant">
+                <div class="message-avatar assistant">智</div>
+                <StreamingText Content="@StateContainer.StreamingContent" />
+            </div>
+        }
+    </div>
+    <ChatInput />
+</div>

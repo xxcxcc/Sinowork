@@ -1,0 +1,27 @@
+@inject StateContainer StateContainer
+
+<div class="app-layout">
+    <LeftSidebar />
+    <div class="main-content">
+        <TopBar />
+        <div class="content-area page-transition">
+            @switch (StateContainer.CurrentPage)
+            {
+                case "chat":
+                    <ChatWindow /> break;
+                case "study":
+                    <StudySpace /> break;
+                case "skills":
+                    <SkillPanel /> break;
+                case "settings":
+                    <SettingsPage /> break;
+                default:
+                    <ChatWindow /> break;
+            }
+        </div>
+    </div>
+    @if (StateContainer.ShowRightPanel)
+    {
+        <RightPanel />
+    }
+</div>

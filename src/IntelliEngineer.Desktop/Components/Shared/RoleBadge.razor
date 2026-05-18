@@ -1,0 +1,16 @@
+<span class="role-badge @Role.ToString().ToLower()">
+    @RoleName
+</span>
+
+@code {
+    [Parameter] public UserRole Role { get; set; }
+
+    private string RoleName => Role switch
+    {
+        UserRole.Engineer => "工程师",
+        UserRole.Clerk => "文员",
+        UserRole.Accountant => "会计",
+        UserRole.ProjectManager => "项目经理",
+        _ => "未知"
+    };
+}
